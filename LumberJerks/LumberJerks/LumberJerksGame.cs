@@ -9,9 +9,12 @@ using Entitas;
 
 namespace LumberJerks {
   public class LumberJerksGame : Game {
+    public static readonly int SCREEN_WIDTH = 1920;
+    public static readonly int SCREEN_HEIGHT = 1080;
+
     public static SpriteBatch SpriteBatch;
 
-    GraphicsDeviceManager graphics;
+    GraphicsDeviceManager _graphics;
 
     Systems systems;
 
@@ -20,7 +23,11 @@ namespace LumberJerks {
     Texture2D tex;
 
     public LumberJerksGame() {
-      graphics = new GraphicsDeviceManager(this);
+      _graphics = new GraphicsDeviceManager(this) {
+        PreferredBackBufferWidth = SCREEN_WIDTH,
+        PreferredBackBufferHeight = SCREEN_HEIGHT
+      };
+
       Content.RootDirectory = "Content";
     }
 
@@ -58,7 +65,7 @@ namespace LumberJerks {
     }
 
     protected override void Draw(GameTime gameTime) {
-      graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+      _graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
       LumberJerksGame.SpriteBatch.Begin();
     
@@ -67,6 +74,10 @@ namespace LumberJerks {
       LumberJerksGame.SpriteBatch.End();
             
       base.Draw(gameTime);
+    }
+
+    private void AddPlayer(Pool pool, Vector2 position) {
+
     }
   }
 }

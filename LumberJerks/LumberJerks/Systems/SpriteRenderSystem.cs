@@ -13,15 +13,12 @@ namespace LumberJerks {
     }
 
     public void Execute() {
-
-
       foreach(Entity e in _group.GetEntities()) {
         LumberJerksGame.SpriteBatch.Draw(
           e.sprite.Texture,
           e.transform.Position - e.sprite.AnchorOffset, 
           e.sprite.Frame, 
           Color.White);
-          //lightableComponent.LightColor * alpha);
       }
     }
   }

@@ -9,7 +9,6 @@ class MainClass {
   }
 
   static void generate() {
-
     // All code generators that should be used
     var codeGenerators = new ICodeGenerator[] {
       new ComponentIndicesGenerator(),
@@ -20,7 +19,7 @@ class MainClass {
     };
 
     // Specify all pools
-    var poolNames = new [] { "Core", "Meta" };
+    var poolNames = new [] { "Core" };
 
     // Specify all blueprints
     var blueprintNames = new string[0];
