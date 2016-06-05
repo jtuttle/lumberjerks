@@ -15,7 +15,7 @@ public static class Pools {
     public static Pool[] allPools {
         get {
             if (_allPools == null) {
-                _allPools = new [] { core, meta };
+                _allPools = new [] { core };
             }
 
             return _allPools;
@@ -37,24 +37,6 @@ public static class Pools {
             }
 
             return _core;
-        }
-    }
-
-    static Pool _meta;
-
-    public static Pool meta {
-        get {
-            if (_meta == null) {
-                _meta = new Pool(MetaComponentIds.TotalComponents, 0, new PoolMetaData("Meta Pool", MetaComponentIds.componentNames, MetaComponentIds.componentTypes));
-                #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
-                if (UnityEngine.Application.isPlaying) {
-                    var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_meta);
-                    UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
-                }
-                #endif
-            }
-
-            return _meta;
         }
     }
 }

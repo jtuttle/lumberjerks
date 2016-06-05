@@ -11,7 +11,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Sprites/lumberjack.png
+#begin Sprites/chr_manA_idleA.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -21,4 +21,4 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/lumberjack.png
+/build:Sprites/chr_manA_idleA.png
