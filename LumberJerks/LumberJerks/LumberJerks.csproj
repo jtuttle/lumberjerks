@@ -44,6 +44,9 @@
     <Reference Include="NVorbis">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\NVorbis.dll</HintPath>
     </Reference>
+    <Reference Include="FarseerPhysicsXNA">
+      <HintPath>..\packages\FarseerPhysicsXNA.3.3.1\lib\FarseerPhysicsXNA.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -103,12 +106,13 @@
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="LumberJerksGame.cs" />
-    <Compile Include="Generated/**" />
+    <Compile Include="Generated\**" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
     <None Include="Entitas\entitas_version" />
     <None Include="Content\Sprites\lumberjack.png" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
