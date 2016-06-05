@@ -107,6 +107,9 @@
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="LumberJerksGame.cs" />
     <Compile Include="Generated\**" />
+    <Compile Include="Systems\MovementSystem.cs" />
+    <Compile Include="Components\PlayerComponent.cs" />
+    <Compile Include="Generated\LumberJerks.PlayerComponentGeneratedExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

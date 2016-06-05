@@ -12,14 +12,14 @@ namespace Entitas {
 
         public bool hasTransform { get { return HasComponent(ComponentIds.Transform); } }
 
-        public Entity AddTransform(float newX, float newY, float newZ) {
+        public Entity AddTransform(float newX, float newY) {
             var component = CreateComponent<LumberJerks.TransformComponent>(ComponentIds.Transform);
             component.X = newX;
             component.Y = newY;
             return AddComponent(ComponentIds.Transform, component);
         }
 
-        public Entity ReplaceTransform(float newX, float newY, float newZ) {
+        public Entity ReplaceTransform(float newX, float newY) {
             var component = CreateComponent<LumberJerks.TransformComponent>(ComponentIds.Transform);
             component.X = newX;
             component.Y = newY;

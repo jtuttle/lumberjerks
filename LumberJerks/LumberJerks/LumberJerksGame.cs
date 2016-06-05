@@ -39,17 +39,18 @@ namespace LumberJerks {
     protected override void LoadContent() {
       SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-      tex = this.Content.Load<Texture2D>("Sprites/lumberjack");
-
+      tex = this.Content.Load<Texture2D>("Sprites/chr_manA_idleA");
 
       Pool pool = new Pool(10);
 
       systems = new Systems().
-        Add(pool.CreateSystem<SpriteRenderSystem>());
+        Add(pool.CreateSystem<SpriteRenderSystem>()).
+        Add(pool.CreateSystem<MovementSystem>());
       
       Entity entity = pool.CreateEntity();
-      entity.AddTransform(0f, 0f, 0f);
-      entity.AddSprite(tex, new Rectangle(0, 0, 100, 100), Vector2.Zero);
+      entity.AddPlayer(PlayerIndex.One);
+      entity.AddTransform(300f, 300f);
+      entity.AddSprite(tex, new Rectangle(0, 0, 128, 128), Vector2.Zero);
     }
 
     protected override void Update(GameTime gameTime) {
