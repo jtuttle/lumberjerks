@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LumberJerks", "LumberJerks\LumberJerks.csproj", "{84562209-8B33-48F5-A323-702BEF5D76F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarseerPhysics.Portable", "FarseerPhysics.Portable\FarseerPhysics.Portable.csproj", "{A1807D3F-3546-4C28-B713-C4F767383B61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,5 +15,9 @@ Global
 		{84562209-8B33-48F5-A323-702BEF5D76F4}.Debug|x86.Build.0 = Debug|x86
 		{84562209-8B33-48F5-A323-702BEF5D76F4}.Release|x86.ActiveCfg = Release|x86
 		{84562209-8B33-48F5-A323-702BEF5D76F4}.Release|x86.Build.0 = Release|x86
+		{A1807D3F-3546-4C28-B713-C4F767383B61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1807D3F-3546-4C28-B713-C4F767383B61}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1807D3F-3546-4C28-B713-C4F767383B61}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1807D3F-3546-4C28-B713-C4F767383B61}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

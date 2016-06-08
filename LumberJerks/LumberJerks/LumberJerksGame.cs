@@ -7,6 +7,10 @@ using Microsoft.Xna.Framework.Input;
 
 using Entitas;
 
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Collision.Shapes;
+using FarseerPhysics.Factories;
+
 namespace LumberJerks {
   public class LumberJerksGame : Game {
     public static readonly int SCREEN_WIDTH = 1920;
@@ -16,11 +20,11 @@ namespace LumberJerks {
 
     GraphicsDeviceManager _graphics;
 
-    Systems systems;
+    Systems _systems;
 
+    World _physicsWorld;
 
-    // TEMP
-    Texture2D tex;
+    Body _body;
 
     public LumberJerksGame() {
       _graphics = new GraphicsDeviceManager(this) {
@@ -39,18 +43,34 @@ namespace LumberJerks {
     protected override void LoadContent() {
       SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-      tex = this.Content.Load<Texture2D>("Sprites/chr_manA_idleA");
+
+      _physicsWorld = new World(Vector2.UnitY * 10.0f);
+
+
+
+      Texture2D tex = this.Content.Load<Texture2D>("Sprites/chr_manA_idleA");
 
       Pool pool = new Pool(10);
 
-      systems = new Systems().
+      _systems = new Systems().
         Add(pool.CreateSystem<SpriteRenderSystem>()).
         Add(pool.CreateSystem<MovementSystem>());
-      
+
+      Vector2 playerPos = new Vector2(300f, 300f);
+
       Entity entity = pool.CreateEntity();
       entity.AddPlayer(PlayerIndex.One);
-      entity.AddTransform(300f, 300f);
+      entity.AddTransform(playerPos.X, playerPos.Y);
       entity.AddSprite(tex, new Rectangle(0, 0, 128, 128), Vector2.Zero);
+
+
+      _body = BodyFactory.CreateRectangle(_physicsWorld, 128, 128, 1, playerPos);
+      _body.BodyType = BodyType.Dynamic;
+      entity.AddPhysicsBody(_body);
+
+      CircleShape circleShape = new CircleShape(0.5f, 1.0f);
+
+      Fixture fixture = _body.CreateFixture(circleShape);
     }
 
     protected override void Update(GameTime gameTime) {
@@ -60,7 +80,9 @@ namespace LumberJerks {
       #endif
 
 
-    
+      _physicsWorld.Step(0.033333f);
+
+      Console.WriteLine(_body.Position);
 
       base.Update(gameTime);
     }
@@ -70,7 +92,7 @@ namespace LumberJerks {
 
       LumberJerksGame.SpriteBatch.Begin();
     
-      systems.Execute();
+      _systems.Execute();
 
       LumberJerksGame.SpriteBatch.End();
             

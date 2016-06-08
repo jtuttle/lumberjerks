@@ -36,16 +36,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\OpenTK.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="NVorbis">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\NVorbis.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
     </Reference>
-    <Reference Include="FarseerPhysicsXNA">
-      <HintPath>..\packages\FarseerPhysicsXNA.3.3.1\lib\FarseerPhysicsXNA.dll</HintPath>
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -110,12 +107,17 @@
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Components\PlayerComponent.cs" />
     <Compile Include="Generated\LumberJerks.PlayerComponentGeneratedExtension.cs" />
+    <Compile Include="Components\PhysicsBodyComponent.cs" />
+    <Compile Include="EntityFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
     <None Include="Entitas\entitas_version" />
     <None Include="Content\Sprites\lumberjack.png" />
     <None Include="packages.config" />
+    <None Include="Lib\MonoGame.Framework.dll" />
+    <None Include="Lib\NVorbis.dll" />
+    <None Include="Lib\OpenTK.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -134,5 +136,12 @@
     <Folder Include="Content\Sprites\" />
     <Folder Include="Systems\" />
     <Folder Include="Components\" />
+    <Folder Include="Lib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FarseerPhysics.Portable\FarseerPhysics.Portable.csproj">
+      <Project>{A1807D3F-3546-4C28-B713-C4F767383B61}</Project>
+      <Name>FarseerPhysics.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
