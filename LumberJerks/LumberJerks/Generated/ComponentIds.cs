@@ -7,19 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public static class ComponentIds {
-    public const int Player = 0;
-    public const int Sprite = 1;
-    public const int Transform = 2;
+    public const int PhysicsBody = 0;
+    public const int Player = 1;
+    public const int Sprite = 2;
+    public const int Transform = 3;
 
-    public const int TotalComponents = 3;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
+        "PhysicsBody",
         "Player",
         "Sprite",
         "Transform"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(LumberJerks.PhysicsBodyComponent),
         typeof(LumberJerks.PlayerComponent),
         typeof(LumberJerks.SpriteComponent),
         typeof(LumberJerks.TransformComponent)
