@@ -14,13 +14,12 @@ namespace LumberJerks {
 
     public void Execute() {
       foreach(Entity e in _group.GetEntities()) {
-
         GamePadState input = GamePad.GetState(e.player.PlayerIndex);
 
         float h = input.ThumbSticks.Left.X;
         float v = input.ThumbSticks.Left.Y;
 
-        Console.WriteLine(h + " " + v);
+        //Console.WriteLine(h + " " + v);
 
         e.transform.X += h;
         e.transform.Y += v;
