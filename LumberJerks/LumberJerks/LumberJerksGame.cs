@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Input;
 
 using Entitas;
 
+using FarseerPhysics;
+using FarseerPhysics.DebugViews;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Factories;
@@ -23,6 +25,7 @@ namespace LumberJerks {
     Systems _systems;
 
     World _physicsWorld;
+    DebugViewXNA _debugView;
 
     Body _body;
 
@@ -43,10 +46,10 @@ namespace LumberJerks {
     protected override void LoadContent() {
       SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-
       _physicsWorld = new World(Vector2.UnitY * 10.0f);
 
-
+      _debugView = new DebugViewXNA(_physicsWorld);
+      _debugView.LoadContent(GraphicsDevice, Content);
 
       Texture2D tex = this.Content.Load<Texture2D>("Sprites/chr_manA_idleA");
 
@@ -56,7 +59,8 @@ namespace LumberJerks {
         Add(pool.CreateSystem<SpriteRenderSystem>()).
         Add(pool.CreateSystem<MovementSystem>());
 
-      Vector2 playerPos = new Vector2(300f, 300f);
+      //Vector2 playerPos = new Vector2(300f, 300f);
+      Vector2 playerPos = new Vector2(0, 0);
 
       Entity entity = pool.CreateEntity();
       entity.AddPlayer(PlayerIndex.One);
@@ -64,13 +68,9 @@ namespace LumberJerks {
       entity.AddSprite(tex, new Rectangle(0, 0, 128, 128), Vector2.Zero);
 
 
-      _body = BodyFactory.CreateRectangle(_physicsWorld, 128, 128, 1, playerPos);
+      _body = BodyFactory.CreateRectangle(_physicsWorld, 2, 2, 1, playerPos);
       _body.BodyType = BodyType.Dynamic;
       entity.AddPhysicsBody(_body);
-
-      CircleShape circleShape = new CircleShape(0.5f, 1.0f);
-
-      Fixture fixture = _body.CreateFixture(circleShape);
     }
 
     protected override void Update(GameTime gameTime) {
@@ -79,10 +79,9 @@ namespace LumberJerks {
         Exit();
       #endif
 
-
       _physicsWorld.Step(0.033333f);
 
-      Console.WriteLine(_body.Position);
+      //Console.WriteLine(_body.Position);
 
       base.Update(gameTime);
     }
@@ -94,13 +93,18 @@ namespace LumberJerks {
     
       _systems.Execute();
 
+      var projection = 
+        Matrix.CreateOrthographicOffCenter(
+          0f,
+          ConvertUnits.ToSimUnits(_graphics.GraphicsDevice.Viewport.Width),
+          ConvertUnits.ToSimUnits(_graphics.GraphicsDevice.Viewport.Height),
+          0f, 0f, 1f);
+      _debugView.RenderDebugData(ref projection);
+
+
       LumberJerksGame.SpriteBatch.End();
             
       base.Draw(gameTime);
-    }
-
-    private void AddPlayer(Pool pool, Vector2 position) {
-
     }
   }
 }

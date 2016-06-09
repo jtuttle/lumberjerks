@@ -9,7 +9,7 @@ namespace LumberJerks {
     Group _group;
 
     public void SetPool(Pool pool) {
-      _group = pool.GetGroup(Matcher.AllOf(Matcher.Transform));
+      _group = pool.GetGroup(Matcher.AllOf(Matcher.Sprite, Matcher.Transform));
     }
 
     public void Execute() {
