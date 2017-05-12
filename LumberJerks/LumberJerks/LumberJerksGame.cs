@@ -27,8 +27,6 @@ namespace LumberJerks {
     World _physicsWorld;
     DebugViewXNA _debugView;
 
-    Body _body;
-
     public LumberJerksGame() {
       _graphics = new GraphicsDeviceManager(this) {
         PreferredBackBufferWidth = SCREEN_WIDTH,
@@ -46,7 +44,7 @@ namespace LumberJerks {
     protected override void LoadContent() {
       SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-      _physicsWorld = new World(Vector2.UnitY * 10.0f);
+      _physicsWorld = new World(Vector2.UnitY * 5.0f);
 
       _debugView = new DebugViewXNA(_physicsWorld);
       _debugView.LoadContent(GraphicsDevice, Content);
@@ -56,21 +54,34 @@ namespace LumberJerks {
       Pool pool = new Pool(10);
 
       _systems = new Systems().
-        Add(pool.CreateSystem<SpriteRenderSystem>()).
-        Add(pool.CreateSystem<MovementSystem>());
+        Add(pool.CreateSystem<PlayerInputSystem>()).
+        Add(pool.CreateSystem<MovementSystem>()).
+        Add(pool.CreateSystem<TransformUpdateSystem>()).
+        Add(pool.CreateSystem<SpriteRenderSystem>());
 
-      //Vector2 playerPos = new Vector2(300f, 300f);
-      Vector2 playerPos = new Vector2(0, 0);
+      Vector2 playerPos = new Vector2(300f, 300f);
+      Entity player = pool.CreateEntity();
+      player.AddPlayer(PlayerIndex.One);
+      player.AddTransform(playerPos.X, playerPos.Y);
+      player.AddSprite(tex, new Rectangle(0, 0, 128, 128), Vector2.Zero);
+      Body playerBody  = BodyFactory.CreateRectangle(_physicsWorld,
+                                                     ConvertUnits.ToSimUnits(128),
+                                                     ConvertUnits.ToSimUnits(128),
+                                                     1,
+                                                     ConvertUnits.ToSimUnits(playerPos));
+      playerBody.BodyType = BodyType.Dynamic;
+      player.AddPhysicsBody(playerBody);
 
-      Entity entity = pool.CreateEntity();
-      entity.AddPlayer(PlayerIndex.One);
-      entity.AddTransform(playerPos.X, playerPos.Y);
-      entity.AddSprite(tex, new Rectangle(0, 0, 128, 128), Vector2.Zero);
-
-
-      _body = BodyFactory.CreateRectangle(_physicsWorld, 2, 2, 1, playerPos);
-      _body.BodyType = BodyType.Dynamic;
-      entity.AddPhysicsBody(_body);
+      float groundHeight = 100.0f;
+      Vector2 groundPos = new Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT);
+      Entity ground = pool.CreateEntity();
+      ground.AddTransform(groundPos.X, groundPos.Y);
+      Body groundBody = BodyFactory.CreateRectangle(_physicsWorld,
+                                                    ConvertUnits.ToSimUnits(SCREEN_WIDTH),
+                                                    ConvertUnits.ToSimUnits(groundHeight),
+                                                    1,
+                                                    ConvertUnits.ToSimUnits(groundPos));
+      ground.AddPhysicsBody(groundBody);
     }
 
     protected override void Update(GameTime gameTime) {
@@ -80,8 +91,6 @@ namespace LumberJerks {
       #endif
 
       _physicsWorld.Step(0.033333f);
-
-      //Console.WriteLine(_body.Position);
 
       base.Update(gameTime);
     }
@@ -100,7 +109,6 @@ namespace LumberJerks {
           ConvertUnits.ToSimUnits(_graphics.GraphicsDevice.Viewport.Height),
           0f, 0f, 1f);
       _debugView.RenderDebugData(ref projection);
-
 
       LumberJerksGame.SpriteBatch.End();
             

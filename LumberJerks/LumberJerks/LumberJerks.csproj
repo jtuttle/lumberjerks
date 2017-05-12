@@ -103,14 +103,14 @@
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="LumberJerksGame.cs" />
-    <Compile Include="Generated\**\*.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
-    <Compile Include="Components\PlayerComponent.cs" />
-    <Compile Include="Generated\LumberJerks.PlayerComponentGeneratedExtension.cs" />
+    <Compile Include="Components\PlayerInputComponent.cs" />
     <Compile Include="Components\PhysicsBodyComponent.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="Farseer\DebugViewXNA.cs" />
     <Compile Include="Farseer\PrimitiveBatch.cs" />
+    <Compile Include="Systems\TransformUpdateSystem.cs" />
+    <Compile Include="Systems\PlayerInputSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -141,6 +141,7 @@
     <Folder Include="Components\" />
     <Folder Include="Lib\" />
     <Folder Include="Farseer\" />
+    <Folder Include="Generated\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FarseerPhysics.Portable\FarseerPhysics.Portable.csproj">

@@ -38,7 +38,7 @@ namespace LumberJerks {
     #if !MONOMAC && !__IOS__  && !__TVOS__
         [STAThread]
     #endif
-        static void Main(string[] args) {
+        static void Maine(string[] args) {
       #if MONOMAC
             NSApplication.Init ();
 
