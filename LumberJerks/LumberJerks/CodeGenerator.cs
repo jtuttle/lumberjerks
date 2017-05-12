@@ -4,7 +4,7 @@ using Entitas;
 using Entitas.CodeGenerator;
 
 class MainClass {
-  public static void Maine(string[] args) {
+  public static void Main(string[] args) {
     generate();
   }
 
